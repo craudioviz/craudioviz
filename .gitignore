@@ -1,4 +1,67 @@
-# Logs
+########################################
+# 📦 Dependencies
+########################################
+node_modules/
+jspm_packages/
+bower_components/
+functions/node_modules/
+
+########################################
+# 🔐 Environment Variables
+########################################
+.env
+.env.*
+!.env.example
+*.local
+
+########################################
+# ⚙️ Build Output
+########################################
+dist/
+dist-ssr/
+build/
+build/Release
+.vite/
+.out/
+.next/
+.nuxt/
+.vuepress/dist
+.temp/
+.cache/
+.parcel-cache/
+.svelte-kit/
+.docusaurus/
+.serverless/
+.fusebox/
+.dynamodb/
+.firebase/
+.vitepress/dist/
+.vitepress/cache/
+web_modules/
+out/
+public/
+
+########################################
+# 🧪 Testing & Coverage
+########################################
+coverage/
+*.lcov
+.nyc_output/
+test-results/
+*.spec.js
+*.spec.ts
+*.spec.jsx
+*.spec.tsx
+*.test.js
+*.test.ts
+*.test.jsx
+*.test.tsx
+.snapshots/
+.vscode-test/
+
+########################################
+# 🧹 Logs & Debug
+########################################
 logs/
 *.log
 npm-debug.log*
@@ -6,26 +69,62 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
-# Environment variables
-.env
+########################################
+# 🧠 Runtime & Cache
+########################################
+.pids
+*.pid
+*.seed
+*.pid.lock
+.node_repl_history
+.yarn-integrity
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+*.tsbuildinfo
+.npm
+.eslintcache
+.stylelintcache
+.tern-port
 
-# Dependencies
-node_modules/
-
-# Build output
-dist/
-dist-ssr/
-.vite/
-*.local
-
-# Editor directories and files
+########################################
+# 🧑‍💻 IDEs & Editors
+########################################
 .vscode/
 !.vscode/extensions.json
 .idea/
+*.sublime-workspace
+*.sublime-project
+
+########################################
+# 🖥️ OS-Specific Junk
+########################################
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+########################################
+# 🧾 Miscellaneous
+########################################
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.bak
+*.tmp
+*.orig
+*.rej
+*.tgz
+.lock-wscript
+.grunt
+lib-cov
