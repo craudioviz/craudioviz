@@ -1,0 +1,76 @@
+/* dashboard.css */
+
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Dashboard container */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f7f9fb;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #222;
+    padding: 32px;
+}
+
+/* Header */
+.dashboard-header {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+}
+
+/* Cards grid */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+/* Individual card */
+.dashboard-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 24px;
+    transition: box-shadow 0.2s;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+/* Card title */
+.dashboard-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Card content */
+.dashboard-card-content {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .dashboard-container {
+        padding: 12px;
+    }
+    .dashboard-header {
+        font-size: 1.3rem;
+    }
+    .dashboard-cards {
+        gap: 12px;
+    }
+    .dashboard-card {
+        padding: 14px;
+    }
+}

@@ -1,0 +1,14 @@
+export default function Header() {
+  return (
+    <header style={{
+      textAlign: 'center',
+      padding: '2rem',
+      background: 'linear-gradient(135deg, #0f0f0f, #1a1a1a)',
+      color: '#fff'
+    }}>
+      <img src="/logo.svg" alt="CR AudioViz AI" style={{ height: '80px' }} />
+      <h1>CR AudioViz AI</h1>
+      <p>Where creativity meets intelligence</p>
+    </header>
+  );
+}
