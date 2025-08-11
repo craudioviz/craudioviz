@@ -1,0 +1,25 @@
+{
+    "$schema": "https://example.com/schemas/module-schema.json",
+    "platform": "CRAudioVizAIAIAI",
+    "version": "1.0.0",
+    "modules": [
+        {
+            "id": "example",
+            "name": "Example Module",
+            "description": "A starter module for testing validation.",
+            "path": "platform/modules/exampleModule.ts",
+            "enabled": true,
+            "entry": "exampleModule.run",
+            "tags": ["starter", "test"],
+            "meta": {
+                "author": "Roy Henderson",
+                "created": "2025-08-08T21:59:00Z"
+            }
+        }
+    ],
+    "settings": {
+        "logLevel": "info",
+        "outputPath": "platform/logs/verifyModules.log",
+        "strictValidation": true
+    }
+}

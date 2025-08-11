@@ -1,0 +1,22 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+export const NavBar: React.FC = () => {
+    return (
+        <nav style={{
+            background: "#222",
+            padding: "1rem",
+            color: "#fff",
+            display: "flex",
+            justifyContent: "space-between"
+        }}>
+            <div>
+                <strong>CR AudioViz</strong>
+            </div>
+            <div style={{ display: "flex", gap: "1rem" }}>
+                <Link to="/" style={{ color: "#fff", textDecoration: "none" }}>Home</Link>
+                <Link to="/cockpit" style={{ color: "#0ff", textDecoration: "none" }}>Cockpit</Link>
+            </div>
+        </nav>
+    );
+};
