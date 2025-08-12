@@ -1,7 +1,11 @@
 import os
+import subprocess
+import datetime
+import json
 
 PLUGIN_DIR = "plugins"
 LOG_FILE = "logs/launch.log"
+REGISTRY_FILE = "registry.json"
 
 def list_plugins():
     return [f for f in os.listdir(PLUGIN_DIR) if f.endswith(".py")]
@@ -39,6 +43,24 @@ def view_logs():
         for line in lines:
             print(line.strip())
 
+def view_registry():
+    if not os.path.exists(REGISTRY_FILE):
+        print("❌ registry.json not found.")
+        return
+    with open(REGISTRY_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    print("\n📦 Plugin Registry")
+    print("+-------------------+-------------------------------+------------------+----------+")
+    print("| Name              | Description                   | Tags             | Version  |")
+    print("+-------------------+-------------------------------+------------------+----------+")
+    for plugin in data:
+        name = plugin.get("name", "")
+        desc = plugin.get("desc", "")
+        tags = plugin.get("tags", "")
+        version = plugin.get("version", "")
+        print(f"| {name:<18} | {desc:<30} | {tags:<16} | {version:<8} |")
+    print("+-------------------+-------------------------------+------------------+----------+")
+
 def log(message):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(LOG_FILE, "a", encoding="utf-8") as f:
@@ -52,6 +74,7 @@ def menu():
         print("[3] Scaffold new plugin")
         print("[4] View recent logs")
         print("[5] Exit")
+        print("[6] View plugin registry")
 
         choice = input("Select an option: ").strip()
         if choice == "1":
@@ -70,6 +93,8 @@ def menu():
         elif choice == "5":
             print("👋 Exiting CLI.")
             break
+        elif choice == "6":
+            view_registry()
         else:
             print("❌ Invalid choice.")
 

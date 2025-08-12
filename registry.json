@@ -1,0 +1,14 @@
+[
+  {
+    "name": "healthcheck",
+    "desc": "Verifies system status\")",
+    "tags": "infra,core\")",
+    "version": "1.2.0\")"
+  },
+  {
+    "name": "investor_package",
+    "desc": "Generates investor-ready assets\")",
+    "tags": "branding,export\")",
+    "version": "1.0.1\")"
+  }
+]
