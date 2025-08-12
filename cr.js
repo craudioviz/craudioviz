@@ -1,168 +1,83 @@
-const readline = require('readline');
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const readline = require("readline");
+const { execSync } = require("child_process");
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
-const pluginRoot = path.join(__dirname, 'src/plugins');
-const indexFile = path.join(pluginRoot, 'index.ts');
+console.log("\n🧭 CR AudioViz AI Launcher\n");
+console.log("[1] Run Full Automation Suite");
+console.log("[2] Add New Plugin");
+console.log("[3] Push to GitHub");
+console.log("[4] Run Google Drive Backup");
+console.log("[5] Inject Supabase Auth");
+console.log("[6] Inject CopilotChat Plugin");
+console.log("[7] Plugin Registry + Status Check");
+console.log("[8] GitHub Setup & Push");
+console.log("[9] Plugin Registry + Health Check");
+console.log("[10] Add New Plugin (AI-generated)");
+console.log("[11] Preview Plugin");
+console.log("[12] Test Plugin Code");
+console.log("[0] Exit\n");
 
-const menu = `
-🧭 CR AudioViz AI Launcher
-
-[1] Run Full Automation Suite
-[2] Add New Plugin
-[3] Push to GitHub
-[4] Run Google Drive Backup
-[5] Inject Supabase Auth
-[6] Inject CopilotChat Plugin
-[7] Plugin Registry + Status Check
-[0] Exit
-`;
-
-console.log(menu);
-rl.question('Select an option: ', async (answer) => {
+rl.question("Select an option: ", (answer) => {
   switch (answer.trim()) {
-    case '1':
-      execSync('node scripts/run-all.js', { stdio: 'inherit' });
+    case "1":
+      console.log("🚀 Running Full Automation Suite...");
+      execSync("node scripts/full-automation.js", { stdio: "inherit" });
+      break;
+    case "2":
+      console.log("🔌 Adding New Plugin...");
+      execSync("node scripts/add-plugin.js", { stdio: "inherit" });
+      break;
+    case "3":
+      console.log("📤 Pushing to GitHub...");
+      execSync("git add . && git commit -m \"Auto commit\" && git push", { stdio: "inherit" });
+      break;
+    case "4":
+      console.log("📁 Running Google Drive Backup...");
+      execSync("python scripts/backup-to-drive.py", { stdio: "inherit" });
+      break;
+    case "5":
+      console.log("🔐 Injecting Supabase Auth...");
+      execSync("node scripts/inject-supabase-auth.js", { stdio: "inherit" });
+      break;
+    case "6":
+      console.log("💬 Injecting CopilotChat Plugin...");
+      execSync("node scripts/inject-copilot-chat.js", { stdio: "inherit" });
+      break;
+    case "7":
+      console.log("📦 Checking Plugin Registry...");
+      execSync("node scripts/plugin-status.js", { stdio: "inherit" });
+      break;
+    case "8":
+      console.log("🚀 Running GitHub Setup...");
+      execSync("node setup-github.js", { stdio: "inherit" });
+      break;
+    case "9":
+      console.log("🧪 Checking Plugin Health...");
+      execSync("node scripts/plugin-status.js", { stdio: "inherit" });
+      break;
+    case "10":
+      console.log("🧠 Generating new plugin...");
+      execSync("node scripts/add-plugin.js", { stdio: "inherit" });
+      break;
+    case "11":
+      console.log("🔍 Previewing plugin...");
+      execSync("node scripts/plugin-preview.js", { stdio: "inherit" });
+      break;
+    case "12":
+      console.log("🧪 Testing plugin code...");
+      execSync("node scripts/plugin-test.js", { stdio: "inherit" });
+      break;
+    case "0":
+      console.log("👋 Exiting...");
       rl.close();
-      break;
-
-    case '2':
-      rl.question('🔌 Plugin name: ', (name) => {
-        const pluginDir = path.join(pluginRoot, name);
-        const pluginFile = path.join(pluginDir, `${name}.tsx`);
-
-        if (!fs.existsSync(pluginDir)) fs.mkdirSync(pluginDir);
-        fs.writeFileSync(pluginFile, `export default function ${name}() {
-  return <div>${name} Plugin Loaded</div>;
-}
-`);
-        fs.appendFileSync(indexFile, `export { default as ${name} } from './${name}/${name}';\n`);
-        console.log(`✅ Plugin ${name} created.`);
-        rl.close();
-      });
-      break;
-
-    case '3':
-      try {
-        execSync('git add .');
-        execSync('git commit -m "Manual push from CLI"');
-        execSync('git push -u origin master');
-        console.log('✅ Pushed to GitHub.');
-      } catch (err) {
-        console.error('❌ GitHub push failed:', err.message);
-      }
-      rl.close();
-      break;
-
-    case '4':
-      try {
-        execSync('python scripts/backup-to-drive.py', { stdio: 'inherit' });
-        console.log('✅ Backup complete.');
-      } catch (err) {
-        console.error('❌ Backup failed:', err.message);
-      }
-      rl.close();
-      break;
-
-    case '5':
-      const authPath = path.join(__dirname, 'src/components/Auth.tsx');
-      fs.writeFileSync(authPath, `
-import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient('https://your-project.supabase.co', 'public-anon-key');
-
-export default function Auth() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const signIn = async () => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) alert(error.message);
-  };
-
-  const signUp = async () => {
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) alert(error.message);
-  };
-
-  return (
-    <div>
-      <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-      <input placeholder="Password" type="password" onChange={e => setPassword(e.target.value)} />
-      <button onClick={signIn}>Login</button>
-      <button onClick={signUp}>Signup</button>
-    </div>
-  );
-}
-`);
-      console.log('✅ Supabase Auth injected.');
-      rl.close();
-      break;
-
-    case '6':
-      const copilotDir = path.join(pluginRoot, 'CopilotChat');
-      const copilotFile = path.join(copilotDir, 'CopilotChat.tsx');
-      if (!fs.existsSync(copilotDir)) fs.mkdirSync(copilotDir);
-      fs.writeFileSync(copilotFile, `
-import { useState } from 'react';
-
-export default function CopilotChat() {
-  const [messages, setMessages] = useState([{ role: 'system', content: 'How can I help?' }]);
-  const [input, setInput] = useState('');
-
-  const sendMessage = async () => {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      body: JSON.stringify([...messages, { role: 'user', content: input }]),
-    });
-    const data = await res.json();
-    setMessages([...messages, { role: 'user', content: input }, data.reply]);
-    setInput('');
-  };
-
-  return (
-    <div>
-      {messages.map((m, i) => <div key={i}><strong>{m.role}:</strong> {m.content}</div>)}
-      <input value={input} onChange={e => setInput(e.target.value)} />
-      <button onClick={sendMessage}>Send</button>
-    </div>
-  );
-}
-`);
-      console.log('✅ CopilotChat plugin injected.');
-      rl.close();
-      break;
-
-    case '7':
-      console.log('\n📦 Plugin Registry:\n');
-      const pluginFolders = fs.readdirSync(pluginRoot).filter(f => fs.statSync(path.join(pluginRoot, f)).isDirectory());
-      const indexContent = fs.readFileSync(indexFile, 'utf-8');
-
-      pluginFolders.forEach(folder => {
-        const pluginPath = path.join(pluginRoot, folder, `${folder}.tsx`);
-        const exists = fs.existsSync(pluginPath);
-        const registered = indexContent.includes(folder);
-        const status = exists && registered ? '✅ Injected' : exists ? '⚠️ Missing index entry' : '❌ Missing file';
-        console.log(`🔌 ${folder}: ${status}`);
-      });
-
-      rl.close();
-      break;
-
-    case '0':
-      console.log('👋 Exiting.');
-      rl.close();
-      break;
-
+      return;
     default:
-      console.log('❌ Invalid option.');
-      rl.close();
+      console.log("❌ Invalid option.");
   }
+
+  rl.close();
 });

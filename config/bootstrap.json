@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    "plugin-builder",
+    "health-checker"
+  ],
+  "env": {
+    "MODE": "dev",
+    "LOG_LEVEL": "verbose"
+  },
+  "git": {
+    "autoPush": true,
+    "repoName": "CRAudioViz"
+  },
+  "cloud": {
+    "sync": true,
+    "provider": "aws",
+    "bucket": "craudioviz-assets"
+  }
+}

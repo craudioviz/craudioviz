@@ -1,0 +1,1 @@
+# Assets for health-checker
