@@ -1,5 +1,58 @@
-
+# -------------- Core Dependencies --------------
 node_modules/
-.tmp.driveupload/
-workspace_backup.zip
+dist/
+build/
 .env
+.env.local
+.env.*.local
+
+# -------------- Logs & Temp --------------
+logs/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.zip
+workspace_backup.zip
+.tmp.driveupload/
+
+# -------------- Python Artifacts --------------
+__pycache__/
+*.py[cod]
+*.pyc
+
+# -------------- IDE & Editor Junk --------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# -------------- OS-Specific Files --------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -------------- TypeScript & Vite --------------
+*.tsbuildinfo
+vite.svg
+
+# -------------- Asset Caches --------------
+*.tgz
+*.tar.gz
+*.gz
+*.7z
+
+# -------------- Plugin & Backup Artifacts --------------
+plugins/**/node_modules/
+plugins/**/dist/
+backups/
+CRAudioVizAI-Frontend/backups/
+CRAudioVizAI-Frontend/.env
+CRAudioVizAI-Backend/.env
+
+# -------------- Misc --------------
+*.orig
+*.rej
+*.patch
+*.diff
